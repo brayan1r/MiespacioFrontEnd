@@ -1,1 +1,37 @@
-<p>ourjob works!</p>
+<app-header></app-header>
+
+<main class="our-job-page">
+    <section class="page-header">
+        <h1>Nuestras Obras</h1>
+        <p>Un portafolio de excelencia arquitectónica e innovación.</p>
+    </section>
+
+    <section class="filters">
+        <button *ngFor="let cat of categories" (click)="setCategory(cat)" [class.active]="activeCategory === cat">
+            {{ cat }}
+        </button>
+    </section>
+
+    <section class="projects-grid-container">
+        <div class="projects-grid">
+            <div class="project-item" *ngFor="let project of filteredProjects">
+                <div class="image-wrapper">
+                    <img [src]="project.image" [alt]="project.title">
+                    <div class="overlay">
+                        <span>{{ project.category }}</span>
+                        <h3>{{ project.title }}</h3>
+                        <button class="btn-details">Ver Proyecto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-simple">
+        <h2>¿Tienes un proyecto en mente?</h2>
+        <p>Permítenos ayudarte a construir la casa de tus sueños.</p>
+        <a routerLink="/quotation" class="btn-dark">Solicitar Presupuesto</a>
+    </section>
+</main>
+
+<app-footer></app-footer>

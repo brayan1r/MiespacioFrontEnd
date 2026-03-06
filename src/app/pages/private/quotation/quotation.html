@@ -1,91 +1,108 @@
 <app-header></app-header>
-<h1>Cotizaciones Activas</h1>
-
-<h2>Gestiona las solicitudes de cotización de clientes potenciales</h2>
-
-<!-- Estados de cotizaciones -->
-
-<div class="status">
-  <div class="status-item">
-    <h3>Pendientes</h3>
-    <p>Valor</p>
+<div class="container">
+  <div class="header-section">
+    <h1>Panel de Cotizaciones</h1>
+    <h2>Gestiona y responde a las solicitudes de tus clientes</h2>
   </div>
-  <div class="status-item">
-    <h3>En revisión</h3>
-    <p>Valor</p>
-  </div>
-  <div class="status-item">
-    <h3>Respondidas</h3>
-    <p>Valor</p>
-  </div>
-</div>
-<div class="filterBox">
-  <div class="filterIcon">
-    <img src="assets/icons/projects/filtrar.png" alt="filtro" />
-  </div>
-  <select name="filter">
-    <option value="">Total Cotizaciones</option>
-    <option value="">Pendientes</option>
-    <option value="">En revisión</option>
-    <option value="">Respondidas</option>
-  </select>
-</div>
 
-<!-- Caja de cotizaciones -->
-
-<div class="quotation">
-  <div class="quoteState"><button>Estado</button></div>
-  <div class="profile">
-    <div class="profileImage">
-      <img src="" alt="" />
+  <!-- Estados de cotizaciones Dashboard -->
+  <div class="status">
+    <div class="status-item">
+      <h3>Total Solicitudes</h3>
+      <p>{{ stats.total }}</p>
     </div>
-    <h4>Laura Perez</h4>
-    <h5>Comercial de cotizaciones</h5>
-    <div class="profileDate">
-      <div class="dateIcon">
-        <img src="assets/icons/quotations/calendar-days.png" alt="" />
+    <div class="status-item">
+      <h3>Presupuesto Alto</h3>
+      <p>{{ stats.highBudget }}</p>
+    </div>
+    <div class="status-item">
+      <h3>Urgentes (1-3m)</h3>
+      <p>{{ stats.urgent }}</p>
+    </div>
+  </div>
+
+  <div class="filter-actions">
+    <div class="search-box">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por tipo o plazo...">
+    </div>
+    <div class="filterBox">
+      <div class="filterIcon">
+        <img src="assets/icons/projects/filtrar.png" alt="filtro" />
       </div>
-      <p>Nov 12 2024</p>
+      <select name="filter">
+        <option value="">Todas las Cotizaciones</option>
+        <option value="">Presupuesto Alto (> $10k)</option>
+        <option value="">Urgentes</option>
+        <option value="">Residenciales</option>
+      </select>
     </div>
   </div>
 
-  <div class="details">
-    <div class="budget">
-      <h3>Presupuesto</h3>
-      <p>Rango de presupuesto</p>
-    </div>
-    <div class="time">
-      <h3>Tiempo</h3>
-      <p>Rango de Tiempo</p>
-    </div>
-    <div class="ubication">
-      <h3>Ubicación</h3>
-      <p>New York</p>
-    </div>
-    <div class="ubication">
-      <h3>Tipo</h3>
-      <p>Residencial</p>
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Sincronizando con el servidor...</p>
+  </div>
+
+  <div *ngIf="error" class="error-alert">
+    {{ error }}
+  </div>
+
+  <!-- Lista de cotizaciones -->
+  <div class="quotation-list" *ngIf="!loading && filteredQuotes.length > 0">
+    <div class="quotation" *ngFor="let quote of filteredQuotes">
+      <div class="quoteState"><button>Nuevo Ingreso</button></div>
+
+      <aside class="profile">
+        <div class="profileImage">
+          <img src="assets/icons/quotations/user.png" alt="user" />
+        </div>
+        <h4>Cliente Potencial</h4>
+        <h5>Interés en {{ quote.project_type }}</h5>
+        <div class="profileDate">
+          <div class="dateIcon">
+            <img src="assets/icons/quotations/calendar-days.png" alt="" />
+          </div>
+          <p>Enviado: Hoy</p>
+        </div>
+      </aside>
+
+      <div class="quote-body">
+        <div class="details">
+          <div class="budget">
+            <h3>Presupuesto</h3>
+            <p>{{ quote.estimatedBudget | currency:'USD':'symbol':'1.0-0' }}</p>
+          </div>
+          <div class="time">
+            <h3>Plazo</h3>
+            <p>{{ quote.estimatedTime }}</p>
+          </div>
+          <div class="ubication">
+            <h3>Ubicación</h3>
+            <p>Regional</p>
+          </div>
+          <div class="ubication">
+            <h3>Tipo</h3>
+            <p>{{ quote.project_type }}</p>
+          </div>
+        </div>
+
+        <div class="description">
+          <h3>Descripción del Interés</h3>
+          <p>Solicitud detallada para un proyecto de tipo <strong>{{ quote.project_type }}</strong>. El cliente espera
+            un tiempo de ejecución estimado en <strong>{{ quote.estimatedTime }}</strong>.</p>
+        </div>
+
+        <div class="actionButtons">
+          <button class="respond" (click)="onRespond(quote)">Responder Ahora</button>
+          <button class="detailsButton">Ver Expediente</button>
+          <button class="reject" (click)="onReject(quote)">Archivar</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="description">
-    <h3>Descripción del proyecto</h3>
-    <p>Descripcion del proyecto junto con el area y zonas comunes</p>
-  </div>
-
-  <div class="contactInfo">
-    <div class="email">
-      <div class="emailIcon"><img src="assets/icons/quotations/correo-electronico.png" alt="" /></div>
-      <p>Email</p>
-    </div>
-    <div class="phone">
-      <div class="phoneIcon"><img src="assets/icons/quotations/telefono.png" alt="" /></div>
-      <p>Telefono</p>
-    </div>
-  </div>
-  <div class="actionButtons">
-    <button class="detailsButton">Ver Detalles</button>
-    <button class="respond">Responder</button>
-    <button class="reject">Rechazar</button>
+  <div *ngIf="!loading && activeQuotes.length === 0" class="no-quotes">
+    <img src="assets/icons/home/projects.png" alt="empty" style="width: 60px; opacity: 0.2; margin-bottom: 1rem;">
+    <p>No hay nuevas cotizaciones por procesar.</p>
   </div>
 </div>

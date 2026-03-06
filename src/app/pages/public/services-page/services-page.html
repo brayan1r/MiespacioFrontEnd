@@ -1,1 +1,64 @@
-<p>services-page works!</p>
+<app-header></app-header>
+
+<main class="services-page">
+    <section class="page-header">
+        <h1>Nuestros Servicios</h1>
+        <p>Soluciones integrales de arquitectura para cada etapa de tu proyecto.</p>
+    </section>
+
+    <section class="services-intro">
+        <div class="intro-text">
+            <h2>Excelencia en cada detalle</h2>
+            <p>Nuestro enfoque combina la creatividad artística con el rigor técnico. Desde el primer boceto hasta la
+                entrega final, nos comprometemos con la calidad excepcional y la satisfacción total del cliente.</p>
+        </div>
+    </section>
+
+    <section class="services-list-container">
+        <div class="services-list">
+            <div class="service-card" *ngFor="let service of services">
+                <div class="service-icon">
+                    <img [src]="service.icon" [alt]="service.title">
+                </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <h2>Nuestro Proceso</h2>
+        <div class="process-steps">
+            <div class="step">
+                <span class="step-num">01</span>
+                <h4>Consultoría</h4>
+                <p>Definimos objetivos y presupuesto.</p>
+            </div>
+            <div class="step">
+                <span class="step-num">02</span>
+                <h4>Concepto</h4>
+                <p>Creamos los primeros bocetos y renders.</p>
+            </div>
+            <div class="step">
+                <span class="step-num">03</span>
+                <h4>Desarrollo</h4>
+                <p>Elaboramos planos técnicos detallados.</p>
+            </div>
+            <div class="step">
+                <span class="step-num">04</span>
+                <h4>Ejecución</h4>
+                <p>Supervisamos la construcción final.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-content">
+            <h3>¿Listo para dar el primer paso?</h3>
+            <p>Agenda una consulta gratuita con nuestros expertos hoy mismo.</p>
+            <a routerLink="/quotation" class="btn-light">Cotizar Proyecto</a>
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>

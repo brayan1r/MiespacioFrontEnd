@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Diseñamos el Futuro de tus Espacios</h1>
+            <p>Transformamos ideas en obras arquitectónicas excepcionales. Innovación, calidad y diseño sostenible en
+                cada proyecto.</p>
+            <div class="hero-buttons">
+                <a routerLink="/quotation" class="btn btn-primary">
+                    Solicitar Cotización <i class="icon-arrow-right"></i>
+                </a>
+                <a routerLink="/our-job" class="btn btn-outline">Ver Obras</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item" *ngFor="let stat of stats">
+            <div class="stat-icon">
+                <img [src]="stat.icon" [alt]="stat.label">
+            </div>
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-content">
+            <h2>Arquitectura que Inspira</h2>
+            <p>Con más de 15 años de experiencia en el sector, nos especializamos en crear espacios únicos que combinan
+                funcionalidad, estética y sostenibilidad. Nuestro equipo de arquitectos expertos trabaja contigo en cada
+                etapa del proceso.</p>
+            <ul class="features">
+                <li><i class="check"></i> Diseño personalizado adaptado a tus necesidades</li>
+                <li><i class="check"></i> Tecnología BIM y renderizado 3D</li>
+                <li><i class="check"></i> Compromiso con la sostenibilidad</li>
+                <li><i class="check"></i> Equipo de arquitectos certificados</li>
+                <li><i class="check"></i> Gestión integral del proyecto</li>
+                <li><i class="check"></i> Garantía de calidad y cumplimiento</li>
+            </ul>
+            <a routerLink="/services" class="btn btn-dark">Conocer Más <i class="icon-arrow-right"></i></a>
+        </div>
+        <div class="about-image">
+            <img src="assets/images/about-blueprints.jpg" alt="Blueprints">
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="featured-projects">
+        <h2>Proyectos Destacados</h2>
+        <p>Explora algunos de nuestros proyectos más emblemáticos que reflejan nuestra pasión por la excelencia
+            arquitectónica.</p>
+        <div class="projects-grid">
+            <div class="project-card" *ngFor="let project of featuredProjects">
+                <div class="project-image">
+                    <img [src]="project.image" [alt]="project.title">
+                </div>
+                <div class="project-info">
+                    <span class="project-type">{{ project.type }}</span>
+                    <h3>{{ project.title }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="view-all">
+            <a routerLink="/our-job" class="btn btn-outline">Ver Todas las Obras <i class="icon-plus"></i></a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h3>¿Listo para empezar tu Proyecto?</h3>
+        <p>Contáctanos hoy y descubre cómo podemos transformar tus ideas en realidad. Recibe una cotización
+            personalizada sin compromiso.</p>
+        <a routerLink="/quotation" class="btn btn-light">Solicitar Cotización Gratis <i
+                class="icon-arrow-right"></i></a>
+    </section>
+</main>

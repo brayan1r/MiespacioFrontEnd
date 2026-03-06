@@ -1,3 +1,23 @@
-<div class="headerGeneral">
-  <div class="imgHeader"><img src="assets/images/headerMiEspacio.jpeg" alt=""></div>
-</div>
+<header class="headerGeneral">
+  <div class="logo">
+    <a routerLink="/"><img src="assets/images/headerMiEspacio.jpeg" alt="Mi Espacio Logo"></a>
+  </div>
+
+  <nav class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+    <a routerLink="/our-job" routerLinkActive="active">Obras Generales</a>
+    <a routerLink="/services" routerLinkActive="active">Servicios</a>
+    <a routerLink="/quotation" routerLinkActive="active">Cotizaciones</a>
+  </nav>
+
+  <div class="auth-box">
+    <ng-container *ngIf="!authService.isAuthenticated(); else loggedIn">
+      <a routerLink="/login" class="btn-login">Iniciar Sesión</a>
+    </ng-container>
+    <ng-template #loggedIn>
+      <a routerLink="/requested-quotes" class="btn-dashboard">Panel Control</a>
+      <a routerLink="/profile" class="btn-profile">Mi Perfil</a>
+      <button (click)="onLogout()" class="btn-logout">Cerrar Sesión</button>
+    </ng-template>
+  </div>
+</header>

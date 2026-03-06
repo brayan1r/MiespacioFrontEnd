@@ -1,1 +1,47 @@
-<p>quotation works!</p>
+<app-header></app-header>
+
+<div class="quotation-container">
+    <div class="quotation-card">
+        <div class="quotation-header">
+            <h1>Solicitar Cotización</h1>
+            <p>Cuéntanos sobre tu proyecto y te daremos un presupuesto estimado.</p>
+        </div>
+
+        <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="project_type">Tipo de Proyecto</label>
+                <select id="project_type" formControlName="project_type">
+                    <option value="" disabled selected>Selecciona el tipo</option>
+                    <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="estimatedBudget">Presupuesto Estimado (USD)</label>
+                <input type="number" id="estimatedBudget" formControlName="estimatedBudget" placeholder="Ej: 5000">
+            </div>
+
+            <div class="form-group">
+                <label for="estimatedTime">Tiempo Estimado</label>
+                <select id="estimatedTime" formControlName="estimatedTime">
+                    <option value="" disabled selected>Selecciona el rango de tiempo</option>
+                    <option *ngFor="let time of timeRanges" [value]="time">{{ time }}</option>
+                </select>
+            </div>
+
+            <div *ngIf="successMsg" class="success-alert">
+                {{ successMsg }}
+            </div>
+
+            <div *ngIf="errorMsg" class="error-alert">
+                {{ errorMsg }}
+            </div>
+
+            <button type="submit" [disabled]="quoteForm.invalid || loading" class="btn-submit">
+                {{ loading ? 'Enviando...' : 'Enviar Solicitud' }}
+            </button>
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>
