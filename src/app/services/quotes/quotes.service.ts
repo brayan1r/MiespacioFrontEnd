@@ -14,7 +14,7 @@ export class QuotesService {
     private getHeaders(): HttpHeaders {
         const token = localStorage.getItem('token') || '';
         return new HttpHeaders({
-            'X-Token': token,
+            'Authorization': `Bearer ${token}`,
         });
     }
 

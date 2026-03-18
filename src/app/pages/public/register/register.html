@@ -26,7 +26,7 @@
                 {{ errorMsg }}
             </div>
 
-            <button type="submit" [disabled]="registerForm.invalid || loading" class="btn-submit">
+            <button type="submit" [disabled]="registerForm.invalid || loading" class="btn btn-primary btn-submit">
                 {{ loading ? 'Creando cuenta...' : 'Registrarse' }}
             </button>
         </form>

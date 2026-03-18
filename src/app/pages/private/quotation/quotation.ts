@@ -43,31 +43,33 @@ export class Quotation implements OnInit {
 
   loadQuotes(): void {
     this.loading = true;
+    this.error = '';
     this.quotesService.getAll().subscribe({
-      next: (res) => {
-        this.activeQuotes = Array.isArray(res.projectTypes) ? res.projectTypes : (res.projectTypes ? [res.projectTypes] : []);
+      next: (res: any) => {
+        // Adaptamos segun la estructura real del backend
+        this.activeQuotes = res.quotes || (Array.isArray(res) ? res : []);
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Error al cargar las cotizaciones';
+        this.error = 'No se pudieron cargar las cotizaciones. Verifica tu conexión.';
         this.loading = false;
       },
     });
   }
 
   onRespond(quote: Quote): void {
-    // Lógica para responder (podría abrir un modal o navegar)
-    console.log('Respondiendo a:', quote);
+    const email = 'info@miespacio.com';
+    window.location.href = `mailto:${email}?subject=Respuesta a Cotización: ${quote.project_type}&body=Hola, hemos recibido tu solicitud de presupuesto...`;
   }
 
   onReject(quote: Quote): void {
-    if (quote._id) {
+    if (quote._id && confirm('¿Estás seguro de que deseas archivar esta cotización?')) {
       this.quotesService.delete(quote._id).subscribe({
         next: () => {
           this.activeQuotes = this.activeQuotes.filter((q) => q._id !== quote._id);
         },
         error: () => {
-          alert('No se pudo rechazar la cotización');
+          alert('Hubo un error al intentar archivar la cotización.');
         },
       });
     }

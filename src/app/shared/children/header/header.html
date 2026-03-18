@@ -1,23 +1,32 @@
-<header class="headerGeneral">
+<header class="header container-px">
   <div class="logo">
-    <a routerLink="/"><img src="assets/images/headerMiEspacio.jpeg" alt="Mi Espacio Logo"></a>
+    <a routerLink="/" (click)="closeMenu()">
+      <img src="assets/images/headerMiEspacio.jpeg" alt="Mi Espacio Logo">
+    </a>
   </div>
 
-  <nav class="nav-links">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
-    <a routerLink="/our-job" routerLinkActive="active">Obras Generales</a>
-    <a routerLink="/services" routerLinkActive="active">Servicios</a>
-    <a routerLink="/quotation" routerLinkActive="active">Cotizaciones</a>
+  <!-- Mobile Toggle -->
+  <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+    <div class="bar" [class.open]="isMenuOpen"></div>
+  </button>
+
+  <nav class="nav-links" [class.mobile-open]="isMenuOpen">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Inicio</a>
+    <a routerLink="/our-job" routerLinkActive="active" (click)="closeMenu()">Obras</a>
+    <a routerLink="/services" routerLinkActive="active" (click)="closeMenu()">Servicios</a>
+    <a routerLink="/quotation" routerLinkActive="active" (click)="closeMenu()">Cotizaciones</a>
+
+    <div class="auth-box">
+      <ng-container *ngIf="!authService.isAuthenticated(); else loggedIn">
+        <a routerLink="/login" class="btn btn-primary" (click)="closeMenu()">Iniciar Sesión</a>
+      </ng-container>
+      <ng-template #loggedIn>
+        <div class="user-menu">
+          <a routerLink="/requested-quotes" class="panel-link" (click)="closeMenu()">Panel</a>
+          <a routerLink="/profile" class="profile-link" (click)="closeMenu()">Perfil</a>
+          <button (click)="onLogout()" class="btn-logout">Cerrar Sesión</button>
+        </div>
+      </ng-template>
+    </div>
   </nav>
-
-  <div class="auth-box">
-    <ng-container *ngIf="!authService.isAuthenticated(); else loggedIn">
-      <a routerLink="/login" class="btn-login">Iniciar Sesión</a>
-    </ng-container>
-    <ng-template #loggedIn>
-      <a routerLink="/requested-quotes" class="btn-dashboard">Panel Control</a>
-      <a routerLink="/profile" class="btn-profile">Mi Perfil</a>
-      <button (click)="onLogout()" class="btn-logout">Cerrar Sesión</button>
-    </ng-template>
-  </div>
-</header>
+</header>

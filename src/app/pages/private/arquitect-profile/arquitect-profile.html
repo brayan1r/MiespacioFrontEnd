@@ -1,94 +1,81 @@
-<app-header>
-  <a href="/arquitect-dashboard">Dashboard</a>
-  <a href="/arquitect-profile">Perfil</a>
-  <a href="/arquitect-projects">Proyectos</a>
-  <a href="/arquitect-messages">Mensajes</a>
-</app-header>
-<h2>Mi Perfil</h2>
+<app-header></app-header>
 
-<h3>Gestiona tu información personal</h3>
-
-<div class="arrangeBoxes">
-  <!-- 1er container: Informacion personal -->
-  <div class="clientInfo">
-    <div class="profileImg">
-      <img src="" alt="" />
-    </div>
-    <h6>Juan Perez</h6>
-    <p>Cliente desde fecha de inicio</p>
-    <div class="clientButton"><button>Cambiar Foto</button></div>
+<main class="profile-page container-px section-spacing">
+  <div class="profile-header">
+    <h1>Mi <span class="accent">Perfil</span></h1>
+    <p>Gestiona tu información personal y configuración de seguridad.</p>
   </div>
 
-  <!-- 2do container: Información Personal -->
+  <div class="profile-grid">
+    <!-- Sidebar: User Info Card -->
+    <aside class="profile-sidebar">
+      <div class="user-card card">
+        <div class="avatar-container">
+          <img [src]="user?.avatar || 'assets/images/default-avatar.png'" [alt]="user?.name">
+          <button class="btn-avatar-edit">Cambiar Foto</button>
+        </div>
+        <div class="user-details">
+          <h3>{{ user?.name }} {{ user?.lastName }}</h3>
+          <p class="role">{{ user?.role || 'Cliente' }}</p>
+          <p class="member-since">Miembro desde 2024</p>
+        </div>
+        <button (click)="onLogout()" class="btn btn-outline btn-full">Cerrar Sesión</button>
+      </div>
+    </aside>
 
-  <div class="personInfo">
-    <h5>Informacion Personal</h5>
-    <h4>Actualiza tus datos personales</h4>
-    <div class="editButton">
-      <button>
-        <div class="buttonIcon">
-          <img src="assets/icons/arquitect-profile/boton-editar.png" alt="" />
+    <!-- Main Content: Settings Forms -->
+    <div class="profile-content">
+      <section class="settings-section card">
+        <div class="section-title">
+          <h3>Información Personal</h3>
+          <p>Actualiza tus datos de contacto básicos.</p>
         </div>
-        Editar
-      </button>
-    </div>
+        <form class="settings-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" [value]="user?.name" readonly>
+            </div>
+            <div class="form-group">
+              <label>Apellido</label>
+              <input type="text" [value]="user?.lastName" readonly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" [value]="user?.email" readonly>
+          </div>
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="tel" value="+1 (555) 000-0000">
+          </div>
+          <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+      </section>
 
-    <div class="formInfo">
-      <form>
-        <div class="formName">
-          <label for="name">Nombre</label>
-          <input class="nameInfo" type="text" name="name" />
+      <section class="settings-section card">
+        <div class="section-title">
+          <h3>Seguridad</h3>
+          <p>Protege tu cuenta actualizando tu contraseña periódicamente.</p>
         </div>
-        <div class="formLastName">
-          <label for="lastName">Apellido</label>
-          <input class="nameInfo" type="text" name="lastName" />
+        <div class="security-actions">
+          <p>Último cambio: hace 3 meses</p>
+          <button class="btn btn-outline">Cambiar Contraseña</button>
         </div>
-        <div class="formEmail">
-          <label for="email">Correo Electrónico</label>
-          <input class="contactInfo" type="email" name="email" id="" />
+      </section>
+
+      <section class="settings-section card danger-zone">
+        <div class="section-title">
+          <h3>Zona de Peligro</h3>
+          <p>Acciones irreversibles relacionadas con tu cuenta.</p>
         </div>
-        <div class="formPhone">
-          <label for="phone">Teléfono</label>
-          <input class="contactInfo" type="tel" name="phone" />
+        <div class="danger-actions">
+          <p>Al eliminar tu cuenta, todos tus datos y proyectos serán borrados permanentemente.</p>
+          <button class="btn btn-danger">Eliminar Cuenta</button>
         </div>
-      </form>
+      </section>
     </div>
   </div>
+</main>
 
-  <!-- 3ro container: Contraseña -->
-
-  <div class="password">
-    <h4>Seguridad</h4>
-    <p>Actualiza tu contraseña</p>
-    <div class="securityButton"><button>Cambiar Contraseña</button></div>
-  </div>
-
-  <!-- 4to container: Notificaciones -->
-
-  <div class="notificationsContainer">
-    <div class="notificationsTitles">
-      <h4>Notificaciones</h4>
-      <p>Configura tus preferencias</p>
-    </div>
-    <div class="notificationsOptions">
-      <form class="notifications">
-        <div class="emailBox">
-        <label for="emailNotification">Notificaciones por Email</label>
-        <input type="checkbox" name="emailNotification" />
-        </div>
-        <div class="updatesBox">
-        <label for="updates">Actualizaciones por Proyecto</label>
-        <input type="checkbox" name="updates" />
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- 5to container: Eliminar cuenta -->
-
-<div class="deleteAccount">
-  <h4 class="advertisment">Zona de peligro</h4>
-  <p>Acciones irreversibles con tu cuenta</p>
-  <div class="deleteButton"><button>Eliminar cuenta</button></div>
-</div>
+<app-footer></app-footer>

@@ -1,0 +1,108 @@
+.billing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    .accent { color: var(--accent-color); }
+  }
+  p { color: var(--text-muted); font-size: 1.1rem; }
+}
+
+.billing-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  .stat-card {
+    padding: 2rem;
+    .label { display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+    .value { display: block; font-size: 2rem; font-weight: 800; color: var(--primary-color); }
+    .sub { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+    &.highlight { border-color: var(--accent-color); .value { color: var(--accent-color); } }
+  }
+}
+
+.billing-table-section {
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    h3 { font-size: 1.5rem; }
+    .filter-select {
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius-md);
+      border: 1px solid var(--border-color);
+      background: var(--surface-color);
+    }
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+  &.loading { opacity: 0.5; }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    thead th {
+      text-align: left;
+      padding: 1rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--surface-color);
+    }
+    tbody td {
+      padding: 1.25rem 1rem;
+      border-bottom: 1px solid var(--surface-color);
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.bill-num { font-weight: 700; color: var(--primary-color); }
+.bill-info {
+  .project { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+  .concept { font-size: 0.8rem; color: var(--text-muted); }
+}
+.amount { font-weight: 700; }
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #eee;
+  &.paid { background: rgba(40, 167, 69, 0.1); color: var(--success-color); }
+  &.pending { background: rgba(255, 193, 7, 0.1); color: #856404; }
+  &.expire { background: rgba(220, 53, 69, 0.1); color: var(--error-color); }
+}
+
+.summary-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 2rem;
+  &.danger-zone { border-left: 5px solid var(--error-color); }
+  .icon { font-size: 1.5rem; }
+  h4 { margin: 0 0 0.5rem; color: var(--error-color); }
+  p { margin: 0; font-size: 0.95rem; }
+}
+
+@media (max-width: 1024px) {
+  .billing-stats { grid-template-columns: 1fr; }
+}
+.btn-icon {
+  background: none; border: none; cursor: pointer; opacity: 0.6; transition: var(--transition);
+  &:hover { opacity: 1; transform: scale(1.1); }
+  img { width: 20px; height: 20px; }
+}

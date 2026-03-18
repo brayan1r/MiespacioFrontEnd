@@ -1,364 +1,118 @@
-h2{
-  margin: 50px 0 0 100px;
-  font-size: 35px;
+.profile-header {
+  margin-bottom: 4rem;
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    .accent { color: var(--accent-color); }
+  }
+  p { color: var(--text-muted); font-size: 1.1rem; }
 }
 
-h3{
-  margin: 20px 0 0 100px;
-  color: #555555;
-  font-weight: normal;
+.profile-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 3rem;
+  align-items: start;
 }
 
-.arrangeBoxes{
+.card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.user-card {
+  text-align: center;
+  .avatar-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 2rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--surface-color);
+    }
+    .btn-avatar-edit {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  .user-details {
+    margin-bottom: 2rem;
+    h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .role { color: var(--accent-color); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1rem; }
+    .member-since { color: var(--text-muted); font-size: 0.85rem; }
+  }
+}
+
+.settings-section {
+  margin-bottom: 2rem;
+  .section-title {
+    margin-bottom: 2rem;
+    h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    p { color: var(--text-muted); font-size: 0.9rem; }
+  }
+
+  &.danger-zone {
+    border-color: rgba(220, 53, 69, 0.2);
+    h3 { color: var(--error-color); }
+  }
+}
+
+.settings-form {
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .form-group {
+    margin-bottom: 1.5rem;
+    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; }
+    input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      background: var(--surface-color);
+      &:focus { outline: none; border-color: var(--primary-color); background: white; }
+    }
+  }
+}
+
+.security-actions, .danger-actions {
   display: flex;
-  flex-flow: row wrap;
-  gap: 40px;
-  margin: 40px 0 0 250px;
-}
-
-//Client Info
-
-.clientInfo{
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  border: solid #666666 1px;
-  border-radius: 25px;
-  min-width: 450px;
-  width: 400px;
-  height: 400px;
-
-  & h6{
-    font-size: 18px;
-    font-weight: 600;
-    margin: 40px 0 0 0;};
-  & p{
-    font-size: 15px;
-    color: #575757;}
-  & button{
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #e6e6e6;
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    border: solid black 0.2px;
-    opacity: 0.5;
-    cursor: pointer;
-    transition: 0.2s;
-
-    &:hover{
-      opacity: 1;
-    }
-  }
+  p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
 }
 
-.profileImg{
-  border: solid rgb(76, 76, 76) 1px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 20px auto 10px auto;
+@media (max-width: 1024px) {
+  .profile-grid { grid-template-columns: 1fr; }
+  .profile-sidebar { max-width: 400px; margin: 0 auto 2rem; }
 }
 
-
-//Personal Info
-
-.personInfo{
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: start;
-  border: solid #666666 1px;
-  border-radius: 25px;
-  min-width: 600px;
-  max-width: 800px;
-  width: 700px;
-  height: 400px;
-  padding: 40px;
-
-  & .nameInfo{
-    width: 280px;
-    border-radius: 10px;
-    height: 30px;
-    margin-bottom: 40px;
-    background-color:#f3f2f2;
-    border: transparent;
-    }
-  & .contactInfo{
-    width: 550px;
-    border-radius: 10px;
-    height: 30px;
-    background-color: #f3f2f2;
-    border: transparent;}
-  & h5{
-    font-size: 16px;
-    font-weight: 600;
-    color: #555555;
-    margin-bottom: 0;
-    margin-top: 10px;
-  }
-  & h4{
-    font-size: 18px;
-    font-weight: normal;
-    color: #666666;
-    margin-bottom: 50px;
-    margin-top: 5px;}
-    & label{
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 5px;}
+@media (max-width: 600px) {
+  .settings-form .form-row { grid-template-columns: 1fr; }
+  .security-actions, .danger-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .btn-full { width: 100%; }
 }
-.editButton{
-    position: absolute;
-    top: 40px;
-    right: 40px;
-
-    & .buttonIcon{
-      width: 15px;
-      height: 15px;
-      margin-right: 5px;
-      display: inline-block;
-      vertical-align: middle;
-
-      & img{
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-      }
-    }
-
-    & button{
-      font-size: 14px;
-      font-weight: bold;
-      background-color: #e6e6e6;
-      width: 90px;
-      height: 40px;
-      border-radius: 10px;
-      border: solid black 0.2px;
-      opacity: 0.5;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover{
-        opacity: 1;
-      }
-    }
-  }
-
-.nameIcon{
-      width: 30px;
-      height: 30px;
-
-      & img{
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-      }}
-
-.formName .nameInfo{
-  position: absolute;
-  top: 145px;
-  left: 40px;
-}
-.formName label{
-  position: absolute;
-  top: 120px;
-  left: 60px;
-  color:#000000
-}
-.formLastName .nameInfo{
-  position: absolute;
-  top: 145px;
-  left: 350px;}
-
-.formLastName label{
-  position: absolute;
-  top: 120px;
-  left: 370px;
-  color:#000000
-}
-
-.formEmail .contactInfo{
-  position: absolute;
-  top: 215px;
-  left: 40px;
-}
-.formEmail label{
-  position: absolute;
-  top: 185px;
-  left: 60px;
-  color:#000000
-}
-.formPhone .contactInfo{
-  position: absolute;
-  top: 285px;
-  left: 40px;
-}
-.formPhone label{
-  position: absolute;
-  top: 260px;
-  left: 60px;
-  color:#000000
-}
-
-//Password
-
-.password{
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  border: solid #666666 1px;
-  width: 575px;
-  height: 171px;
-  border-radius: 25px;
-  min-width: 400px;
-  padding: 20px;
-
-  & h4, p{
-    margin-bottom: 0;
-    margin-top: 10px;}
-  & h4{
-    font-size: 16px;
-    font-weight: 600;
-    color: #555555;}
-  & p{
-    font-size: 18px;
-    color: #575757;
-    margin-bottom: 30px;}
-  }
-
-.securityButton{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-
-    & button{
-      font-size: 16px;
-      font-weight: bold;
-      background-color: #e6e6e6;
-      width: 400px;
-      height: 40px;
-      border-radius: 10px;
-      border: solid black 0.2px;
-      opacity: 0.5;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover{
-        opacity: 1;
-      }
-    }
-  }
-
-
-
-//Notifications
-
-.notificationsContainer{
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  border: solid #666666 1px;
-  width: 575px;
-  border-radius: 25px;
-  min-width: 400px;
-  height: 171px;
-  padding: 10px 20px;
-
-  & h4, p{
-    margin-bottom: 0;
-    margin-top: 10px;}
-  & h4{
-    font-size: 16px;
-    font-weight: 600;
-    color: #555555;}
-  & p{
-    font-size: 18px;
-    color: #575757;
-    margin-bottom: 20px;}
-
-}
-
-.notifications{
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
-  & label{
-    font-size: 14px;
-    font-weight: 600;
-    color: #444444;
-  };
-}
-.emailBox label{
-        margin-right: 250px;
-  }
-
-.updatesBox label{
-        margin-right: 217px;
-  }
-
-.updatesBox input{
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-  }
-.emailBox input{
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-  }
-
-//Eliminar Cuenta
-
-.deleteAccount{
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  border: solid #ff8e8e 1px;
-  margin: 40px 0 0 250px;
-  width: 1190px;
-  height: 150px;
-  border-radius: 25px;
-  padding: 20px;
-
-  & .advertisment{
-    font-size: 18px;
-    font-weight: 500;
-    color: #ff0000;
-    margin-bottom: 0;
-    margin-top: 10px;}
-
-
-  & p{
-    font-size: 18px;
-    color: #575757;
-    margin-top: 0;}
-}
-
-.deleteButton{
-    margin-top: 0;
-
-    & button{
-      font-size: 16px;
-      font-weight: normal;
-      background-color: #ffffff;
-      color: #ff0000;
-      width: 150px;
-      height: 40px;
-      border-radius: 10px;
-      border: solid #ff0000 0.2px;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover{
-        background-color: #ff0000;
-        color: white;
-      }
-    }
-  }

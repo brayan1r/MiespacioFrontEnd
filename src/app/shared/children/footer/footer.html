@@ -1,15 +1,14 @@
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-info">
+<footer class="footer container-px">
+  <div class="footer-grid">
+    <div class="footer-brand">
       <div class="footer-logo">
         <img src="assets/images/headerMiEspacio.jpeg" alt="Mi Espacio Logo">
       </div>
-      <p>Diseñamos espacios que inspiran. Arquitectura moderna con visión sostenible para transformar tus ideas en
-        realidad.</p>
+      <p>Diseñamos espacios que inspiran. Arquitectura moderna con visión sostenible para transformar tus ideas en realidad.</p>
     </div>
 
-    <div class="footer-links">
-      <h4>Enlaces Rápidos</h4>
+    <div class="footer-nav">
+      <h4>Enlaces</h4>
       <ul>
         <li><a routerLink="/">Inicio</a></li>
         <li><a routerLink="/our-job">Obras</a></li>
@@ -24,13 +23,18 @@
         <li>Diseño Arquitectónico</li>
         <li>Remodelaciones</li>
         <li>Diseño de Interiores</li>
-        <li>Asesoría Técnica</li>
         <li>Gestión de Proyectos</li>
       </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contacto</h4>
+      <p>Calle Ficticia 123, MX</p>
+      <p>contacto@arquistudio.com</p>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2024 ARQUISTUDIO. Todos los derechos reservados.</p>
+    <p>&copy; {{ currentYear }} MI ESPACIO. Todos los derechos reservados.</p>
   </div>
-</footer>
+</footer>

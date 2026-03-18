@@ -1,47 +1,61 @@
 <app-header></app-header>
 
-<div class="quotation-container">
-    <div class="quotation-card">
-        <div class="quotation-header">
-            <h1>Solicitar Cotización</h1>
-            <p>Cuéntanos sobre tu proyecto y te daremos un presupuesto estimado.</p>
+<section class="quotation-header">
+  <div class="container-px">
+    <h1>Solicita tu <span class="accent">Presupuesto</span></h1>
+    <p>Cuéntanos sobre tu visión y te ayudaremos a proyectar el costo y tiempo estimado para hacerla realidad.</p>
+  </div>
+</section>
+
+<section class="quotation-content container-px section-spacing">
+  <div class="quotation-grid">
+    <div class="quotation-info">
+      <h3>¿Por qué cotizar con nosotros?</h3>
+      <ul class="benefits-list">
+        <li>Transparencia Total: Sin costos ocultos.</li>
+        <li>Precisión Técnica: Basada en precios reales del mercado.</li>
+        <li>Rapidez: Respuesta en menos de 48 horas.</li>
+      </ul>
+      <div class="info-card">
+        <p>¿Necesitas algo más específico?</p>
+        <a routerLink="/contact" class="btn btn-outline">Contáctanos Directamente</a>
+      </div>
+    </div>
+
+    <div class="quotation-form-card">
+      <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="project_type">Tipo de Proyecto</label>
+          <select id="project_type" formControlName="project_type">
+            <option value="" disabled>Selecciona una opción</option>
+            <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
+          </select>
         </div>
 
-        <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="project_type">Tipo de Proyecto</label>
-                <select id="project_type" formControlName="project_type">
-                    <option value="" disabled selected>Selecciona el tipo</option>
-                    <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
-                </select>
-            </div>
+        <div class="form-group">
+          <label for="estimatedBudget">Presupuesto Estimado ($)</label>
+          <input type="number" id="estimatedBudget" formControlName="estimatedBudget" placeholder="Ej: 50000">
+        </div>
 
-            <div class="form-group">
-                <label for="estimatedBudget">Presupuesto Estimado (USD)</label>
-                <input type="number" id="estimatedBudget" formControlName="estimatedBudget" placeholder="Ej: 5000">
-            </div>
+        <div class="form-group">
+          <label for="estimatedTime">Tiempo Deseado</label>
+          <select id="estimatedTime" formControlName="estimatedTime">
+            <option value="" disabled>Selecciona una opción</option>
+            <option *ngFor="let time of timeRanges" [value]="time">{{ time }}</option>
+          </select>
+        </div>
 
-            <div class="form-group">
-                <label for="estimatedTime">Tiempo Estimado</label>
-                <select id="estimatedTime" formControlName="estimatedTime">
-                    <option value="" disabled selected>Selecciona el rango de tiempo</option>
-                    <option *ngFor="let time of timeRanges" [value]="time">{{ time }}</option>
-                </select>
-            </div>
+        <div class="alerts" *ngIf="successMsg || errorMsg">
+          <div class="alert success" *ngIf="successMsg">{{ successMsg }}</div>
+          <div class="alert error" *ngIf="errorMsg">{{ errorMsg }}</div>
+        </div>
 
-            <div *ngIf="successMsg" class="success-alert">
-                {{ successMsg }}
-            </div>
-
-            <div *ngIf="errorMsg" class="error-alert">
-                {{ errorMsg }}
-            </div>
-
-            <button type="submit" [disabled]="quoteForm.invalid || loading" class="btn-submit">
-                {{ loading ? 'Enviando...' : 'Enviar Solicitud' }}
-            </button>
-        </form>
+        <button type="submit" [disabled]="quoteForm.invalid || loading" class="btn btn-primary btn-submit">
+          {{ loading ? 'Enviando...' : 'Enviar Solicitud' }}
+        </button>
+      </form>
     </div>
-</div>
+  </div>
+</section>
 
 <app-footer></app-footer>

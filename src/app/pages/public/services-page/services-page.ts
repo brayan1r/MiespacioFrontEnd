@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Header } from '../../../shared/children/header/header';
 import { Footer } from '../../../shared/children/footer/footer';
+import { ServicesService } from '../../../services/services.service';
 
 @Component({
   selector: 'app-services-page',
@@ -10,8 +11,11 @@ import { Footer } from '../../../shared/children/footer/footer';
   templateUrl: './services-page.html',
   styleUrl: './services-page.scss',
 })
-export class ServicesPage {
-  services = [
+export class ServicesPage implements OnInit {
+  services: any[] = [];
+  loading = true;
+
+  staticServices = [
     {
       title: 'Diseño Arquitectónico',
       description: 'Creación de planos conceptuales y técnicos para residencias, comercios e industrias.',
@@ -43,4 +47,23 @@ export class ServicesPage {
       icon: 'assets/icons/footer/grafico.png'
     }
   ];
+
+  constructor(private servicesService: ServicesService) { }
+
+  ngOnInit(): void {
+    this.loadServices();
+  }
+
+  loadServices(): void {
+    this.servicesService.getAllServices().subscribe({
+      next: (data) => {
+        this.services = data.length > 0 ? data : this.staticServices;
+        this.loading = false;
+      },
+      error: () => {
+        this.services = this.staticServices;
+        this.loading = false;
+      }
+    });
+  }
 }

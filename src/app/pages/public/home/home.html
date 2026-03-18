@@ -28,53 +28,79 @@
     </section>
 
     <!-- About Section -->
-    <section class="about">
-        <div class="about-content">
-            <h2>Arquitectura que Inspira</h2>
-            <p>Con más de 15 años de experiencia en el sector, nos especializamos en crear espacios únicos que combinan
-                funcionalidad, estética y sostenibilidad. Nuestro equipo de arquitectos expertos trabaja contigo en cada
-                etapa del proceso.</p>
-            <ul class="features">
-                <li><i class="check"></i> Diseño personalizado adaptado a tus necesidades</li>
-                <li><i class="check"></i> Tecnología BIM y renderizado 3D</li>
-                <li><i class="check"></i> Compromiso con la sostenibilidad</li>
-                <li><i class="check"></i> Equipo de arquitectos certificados</li>
-                <li><i class="check"></i> Gestión integral del proyecto</li>
-                <li><i class="check"></i> Garantía de calidad y cumplimiento</li>
-            </ul>
-            <a routerLink="/services" class="btn btn-dark">Conocer Más <i class="icon-arrow-right"></i></a>
-        </div>
-        <div class="about-image">
-            <img src="assets/images/about-blueprints.jpg" alt="Blueprints">
-        </div>
-    </section>
+    <section class="hero">
+  <div class="hero-content container-px">
+    <span class="badge">Estudio de Arquitectura</span>
+    <h1>Arquitectura que Transforma <span class="accent">Espacios</span></h1>
+    <p>Creamos diseños innovadores que fusionan funcionalidad, estética y sostenibilidad para dar vida a tus proyectos más ambiciosos.</p>
+    <div class="hero-actions">
+      <a routerLink="/quotation" class="btn btn-primary">Iniciar Proyecto</a>
+      <a routerLink="/our-job" class="btn btn-outline">Ver Portafolio</a>
+    </div>
+  </div>
+</section>
 
-    <!-- Featured Projects Section -->
-    <section class="featured-projects">
-        <h2>Proyectos Destacados</h2>
-        <p>Explora algunos de nuestros proyectos más emblemáticos que reflejan nuestra pasión por la excelencia
-            arquitectónica.</p>
-        <div class="projects-grid">
-            <div class="project-card" *ngFor="let project of featuredProjects">
-                <div class="project-image">
-                    <img [src]="project.image" [alt]="project.title">
-                </div>
-                <div class="project-info">
-                    <span class="project-type">{{ project.type }}</span>
-                    <h3>{{ project.title }}</h3>
-                </div>
-            </div>
+<section class="stats container-px">
+  <div class="stats-grid">
+    <div class="stat-item" *ngFor="let stat of stats">
+      <div class="stat-number">{{ stat.value }}</div>
+      <div class="stat-label">{{ stat.label }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="about container-px section-spacing">
+  <div class="about-grid">
+    <div class="about-image">
+      <img src="assets/images/aboutUs.JPG" alt="Nuestro Estudio">
+    </div>
+    <div class="about-text">
+      <h2>Diseño con Propósito</h2>
+      <p>En **MI ESPACIO**, creemos que cada estructura cuenta una historia. Nuestro enfoque combina la precisión técnica con una sensibilidad artística única.</p>
+      <ul class="features-list">
+        <li>Innovación Constante</li>
+        <li>Sostenibilidad Ambiental</li>
+        <li>Atención Personalizada</li>
+      </ul>
+      <a routerLink="/services" class="btn btn-outline">Nuestros Servicios</a>
+    </div>
+  </div>
+</section>
+
+<section class="featured-projects container-px section-spacing">
+  <div class="section-header">
+    <h2>Proyectos Destacados</h2>
+    <a routerLink="/our-job" class="view-all">Ver todos →</a>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card" *ngFor="let project of featuredProjects">
+      <div class="project-image">
+        <img [src]="project.image" [alt]="project.title">
+        <div class="project-overlay">
+          <div class="project-category">{{ project.category }}</div>
+          <h3>{{ project.title }}</h3>
+          <a [routerLink]="['/our-job']" class="btn btn-light btn-sm">Ver Detalles</a>
         </div>
-        <div class="view-all">
-            <a routerLink="/our-job" class="btn btn-outline">Ver Todas las Obras <i class="icon-plus"></i></a>
-        </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta container-px">
+  <div class="cta-banner">
+    <h2>¿Listo para construir tu sueño?</h2>
+    <p>Solicita una cotización personalizada y descubre cómo podemos ayudarte.</p>
+    <a routerLink="/quotation" class="btn btn-light">Obtener Cotización</a>
+  </div>
+</section>
+
 
     <!-- CTA Section -->
     <section class="cta">
         <h3>¿Listo para empezar tu Proyecto?</h3>
         <p>Contáctanos hoy y descubre cómo podemos transformar tus ideas en realidad. Recibe una cotización
-            personalizada sin compromiso.</p>
+                personalizada sin compromiso.</p>
         <a routerLink="/quotation" class="btn btn-light">Solicitar Cotización Gratis <i
                 class="icon-arrow-right"></i></a>
     </section>

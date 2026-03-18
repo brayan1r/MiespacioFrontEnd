@@ -1,108 +1,73 @@
 <app-header></app-header>
-<div class="container">
-  <div class="header-section">
-    <h1>Panel de Cotizaciones</h1>
-    <h2>Gestiona y responde a las solicitudes de tus clientes</h2>
-  </div>
 
-  <!-- Estados de cotizaciones Dashboard -->
-  <div class="status">
-    <div class="status-item">
-      <h3>Total Solicitudes</h3>
-      <p>{{ stats.total }}</p>
+<main class="quotation-admin-page container-px section-spacing">
+  <div class="admin-header">
+    <div class="header-text">
+      <h1>Panel de <span class="accent">Cotizaciones</span></h1>
+      <p>Supervisa y gestiona las solicitudes de presupuesto entrantes.</p>
     </div>
-    <div class="status-item">
-      <h3>Presupuesto Alto</h3>
-      <p>{{ stats.highBudget }}</p>
-    </div>
-    <div class="status-item">
-      <h3>Urgentes (1-3m)</h3>
-      <p>{{ stats.urgent }}</p>
-    </div>
-  </div>
-
-  <div class="filter-actions">
-    <div class="search-box">
+    <div class="header-search">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por tipo o plazo...">
     </div>
-    <div class="filterBox">
-      <div class="filterIcon">
-        <img src="assets/icons/projects/filtrar.png" alt="filtro" />
-      </div>
-      <select name="filter">
-        <option value="">Todas las Cotizaciones</option>
-        <option value="">Presupuesto Alto (> $10k)</option>
-        <option value="">Urgentes</option>
-        <option value="">Residenciales</option>
-      </select>
+  </div>
+
+  <div class="stats-cards">
+    <div class="stat-card card">
+      <span class="label">Solicitudes Totales</span>
+      <span class="value">{{ stats.total }}</span>
+    </div>
+    <div class="stat-card card">
+      <span class="label">Presupuesto Alto</span>
+      <span class="value">{{ stats.highBudget }}</span>
+    </div>
+    <div class="stat-card card urgent">
+      <span class="label">Plazos Urgentes</span>
+      <span class="value">{{ stats.urgent }}</span>
     </div>
   </div>
 
-  <div *ngIf="loading" class="loading">
-    <div class="spinner"></div>
-    <p>Sincronizando con el servidor...</p>
-  </div>
+  <div class="quotes-grid" [class.loading]="loading">
+    <div *ngIf="filteredQuotes.length === 0 && !loading" class="empty-state card">
+      <p>No se encontraron solicitudes que coincidan con tu búsqueda.</p>
+    </div>
 
-  <div *ngIf="error" class="error-alert">
-    {{ error }}
-  </div>
+    <div class="quote-card card" *ngFor="let quote of filteredQuotes">
+      <div class="quote-header">
+        <span class="status-badge">Nueva Solicitud</span>
+        <span class="quote-date">Recibido hoy</span>
+      </div>
 
-  <!-- Lista de cotizaciones -->
-  <div class="quotation-list" *ngIf="!loading && filteredQuotes.length > 0">
-    <div class="quotation" *ngFor="let quote of filteredQuotes">
-      <div class="quoteState"><button>Nuevo Ingreso</button></div>
-
-      <aside class="profile">
-        <div class="profileImage">
-          <img src="assets/icons/quotations/user.png" alt="user" />
+      <div class="quote-main">
+        <div class="user-avatar">
+          <img src="assets/icons/quotations/user.png" alt="Usuario">
         </div>
-        <h4>Cliente Potencial</h4>
-        <h5>Interés en {{ quote.project_type }}</h5>
-        <div class="profileDate">
-          <div class="dateIcon">
-            <img src="assets/icons/quotations/calendar-days.png" alt="" />
-          </div>
-          <p>Enviado: Hoy</p>
+        <div class="quote-info">
+          <h3>Proyecto {{ quote.project_type }}</h3>
+          <p class="summary">Interés en servicios de arquitectura con presupuesto aproximado.</p>
         </div>
-      </aside>
+      </div>
 
-      <div class="quote-body">
-        <div class="details">
-          <div class="budget">
-            <h3>Presupuesto</h3>
-            <p>{{ quote.estimatedBudget | currency:'USD':'symbol':'1.0-0' }}</p>
-          </div>
-          <div class="time">
-            <h3>Plazo</h3>
-            <p>{{ quote.estimatedTime }}</p>
-          </div>
-          <div class="ubication">
-            <h3>Ubicación</h3>
-            <p>Regional</p>
-          </div>
-          <div class="ubication">
-            <h3>Tipo</h3>
-            <p>{{ quote.project_type }}</p>
-          </div>
+      <div class="quote-details">
+        <div class="detail-item">
+          <label>Presupuesto</label>
+          <span>{{ quote.estimatedBudget | currency }}</span>
         </div>
+        <div class="detail-item">
+          <label>Plazo</label>
+          <span>{{ quote.estimatedTime }}</span>
+        </div>
+        <div class="detail-item">
+          <label>Tipo</label>
+          <span>{{ quote.project_type }}</span>
+        </div>
+      </div>
 
-        <div class="description">
-          <h3>Descripción del Interés</h3>
-          <p>Solicitud detallada para un proyecto de tipo <strong>{{ quote.project_type }}</strong>. El cliente espera
-            un tiempo de ejecución estimado en <strong>{{ quote.estimatedTime }}</strong>.</p>
-        </div>
-
-        <div class="actionButtons">
-          <button class="respond" (click)="onRespond(quote)">Responder Ahora</button>
-          <button class="detailsButton">Ver Expediente</button>
-          <button class="reject" (click)="onReject(quote)">Archivar</button>
-        </div>
+      <div class="quote-actions">
+        <button class="btn btn-primary btn-sm" (click)="onRespond(quote)">Responder</button>
+        <button class="btn btn-outline btn-sm" (click)="onReject(quote)">Archivar</button>
       </div>
     </div>
   </div>
+</main>
 
-  <div *ngIf="!loading && activeQuotes.length === 0" class="no-quotes">
-    <img src="assets/icons/home/projects.png" alt="empty" style="width: 60px; opacity: 0.2; margin-bottom: 1rem;">
-    <p>No hay nuevas cotizaciones por procesar.</p>
-  </div>
-</div>
+<app-footer></app-footer>

@@ -1,93 +1,76 @@
 <app-header></app-header>
 
-<!-- Titulos Principales -->
-
-<h1>Gestión de Proyectos</h1>
-<h2>Administra todos los proyectos asignados</h2>
-
-<!-- Estados Obras -->
-<div class="status">
-  <div class="status-item">
-    <h3>Total Proyectos</h3>
-    <p>Valor</p>
-  </div>
-  <div class="status-item">
-    <h3>En Progreso</h3>
-    <p>Valor</p>
-  </div>
-  <div class="status-item">
-    <h3>Pendientes</h3>
-    <p>Valor</p>
-  </div>
-  <div class="status-item">
-    <h3>Completados</h3>
-    <p>Valor</p>
-  </div>
-</div>
-<div class="filterBox">
-  <div class="filterIcon">
-    <img src="assets/icons/projects/filtrar.png" alt="filtro" />
-  </div>
-  <select name="filter">
-    <option value="">Total Proyectos</option>
-    <option value="">En Progreso</option>
-    <option value="">Pendientes</option>
-    <option value="">Completados</option>
-  </select>
-</div>
-
-<!-- Cajas Proyectos -->
-
-<div class="cajaProyecto">
-  <div class="buttons">
-    <button class="edit">
-      <img src="assets/icons/projects/boton-editar.png" alt="edit" />
-    </button>
-    <button class="hide">
-      <img src="assets/icons/projects/ojo.png" alt="hide" />
-    </button>
-  </div>
-  <div class="statusProject">
-    <h4>Estado de Obra</h4>
-  </div>
-  <div class="mainImg">
-    <img src="" alt="" />
-  </div>
-  <div class="mainTitle"><h6>Titulo Proyecto</h6></div>
-  <div class="description"><p>Descripción Proyecto</p></div>
-  <div class="clientProfile">
-    <div class="clientImg"><img src="" alt="" /></div>
-    <div class="clientName">
-      <h2 class="clientName">Pepito</h2>
-      <h3>Cliente</h3>
+<main class="admin-projects container-px section-spacing">
+  <div class="admin-header">
+    <div class="header-text">
+      <h1>Gestión de <span class="accent">Proyectos</span></h1>
+      <p>Administra y supervisa todas las obras del estudio.</p>
     </div>
-    <div class="profileButton">
-      <div class="profileButtonImg">
-        <img src="assets/icons/projects/usuario.png" alt="" />
+    <button class="btn btn-primary">Crear Nueva Obra</button>
+  </div>
+
+  <div class="stats-overview">
+    <div class="stat-card card">
+      <span class="stat-value">{{ getStats().total }}</span>
+      <span class="stat-label">Total Obras</span>
+    </div>
+    <div class="stat-card card">
+      <span class="stat-value">{{ getStats().published }}</span>
+      <span class="stat-label">Publicadas</span>
+    </div>
+    <div class="stat-card card">
+      <span class="stat-value">{{ getStats().unpublished }}</span>
+      <span class="stat-label">Borradores</span>
+    </div>
+  </div>
+
+  <div class="projects-list" [class.loading]="loading">
+    <div *ngIf="projects.length === 0 && !loading" class="empty-state card">
+      <p>No hay proyectos registrados.</p>
+    </div>
+
+    <div class="project-admin-card card" *ngFor="let project of projects">
+      <div class="project-main">
+        <div class="project-thumb">
+          <img [src]="project.cover?.url || 'assets/images/placeholder.jpg'" [alt]="project.title">
+        </div>
+        <div class="project-info">
+          <div class="category-tag">{{ project.category }}</div>
+          <h3>{{ project.title }}</h3>
+          <p class="location">{{ project.location?.city }}, {{ project.location?.country }}</p>
+        </div>
       </div>
-      <button>Ver Perfil</button>
+
+      <div class="project-meta">
+        <div class="meta-item">
+          <label>Año</label>
+          <span>{{ project.year }}</span>
+        </div>
+        <div class="meta-item">
+          <label>Área</label>
+          <span>{{ project.areaM2 }} m²</span>
+        </div>
+        <div class="meta-item">
+          <label>Estado</label>
+          <span class="badge" [class.published]="project.isPublished">
+            {{ project.isPublished ? 'Público' : 'Borrador' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="project-actions">
+        <button class="btn-action edit" title="Editar">
+          <img src="assets/icons/projects/boton-editar.png" alt="Editar">
+        </button>
+        <button class="btn-action toggle" [title]="project.isPublished ? 'Ocultar' : 'Mostrar'">
+          <img src="assets/icons/projects/ojo.png" alt="Visibilidad">
+        </button>
+        <button class="btn-action delete" title="Eliminar">
+          <img src="assets/icons/footer/insignia.png" alt="Borrar" style="filter: hue-rotate(340deg);">
+        </button>
+      </div>
     </div>
   </div>
-  <div class="barraProgreso">
-    <h3>Progreso</h3>
-    <div class="barra"><div class="controlledProgress"></div></div>
-    <div class="barraPorcentaje"><p>%%%</p></div>
-  </div>
-  <div class="infoGeneral">
-    <div class="presupuesto">
-      <div class="presupuestoIcono"><img src="assets/icons/projects/dolar.png" alt=""></div>
-      <h3>Presupuesto</h3>
-      <p>Valor</p>
-    </div>
-    <div class="fechaInicio">
-      <div class="calendarioIcono"><img src="assets/icons/projects/calendar-days.png" alt=""></div>
-      <h3>Inicio</h3>
-      <p>fechaInicio</p>
-    </div>
-    <div class="finalizacion">
-      <div class="finIcono"><img src="assets/icons/projects/reloj.png" alt=""></div>
-      <h3>Finalización Estimada</h3>
-      <p>fechaFinalizacion</p>
-    </div>
-  </div>
-</div>
+</main>
+
+<app-footer></app-footer>

@@ -11,9 +11,20 @@ import { AuthService } from '../../../services/auth';
   styleUrl: './header.scss',
 })
 export class Header {
+  isMenuOpen = false;
+
   constructor(public authService: AuthService) { }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
+  }
 
   onLogout(): void {
     this.authService.logout();
+    this.closeMenu();
   }
 }

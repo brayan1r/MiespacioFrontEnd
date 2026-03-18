@@ -1,19 +1,56 @@
+:root {
+  /* Colors - Architectural Palette */
+  --primary-color: #1a1a1a;
+  --primary-light: #333333;
+  --secondary-color: #666666;
+  --accent-color: #007bff;
+  --background-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --text-color: #1a1a1a;
+  --text-muted: #666666;
+  --error-color: #dc3545;
+  --success-color: #28a745;
+  --border-color: #e9ecef;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+  --header-height: 80px;
+
+  /* Design Tokens */
+  --border-radius-sm: 6px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #fff;
-  color: #1a1a1a;
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  transition: var(--transition);
 }
 
 button {
@@ -21,4 +58,56 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+  transition: var(--transition);
 }
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utilities */
+.container-px {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+@media (max-width: 1024px) {
+  .container-px {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+.text-center { text-align: center; }
+.mt-xl { margin-top: var(--spacing-xl); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+/* Buttons System */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+
+  &-primary {
+    background-color: var(--primary-color);
+    color: white;
+    &:hover { background-color: var(--primary-light); }
+  }
+
+  &-outline {
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    &:hover { background-color: var(--surface-color); }
+  }
+
+  &-light {
+    background-color: white;
+    color: var(--primary-color);
+    &:hover { background-color: var(--surface-color); }
+  }
+}
