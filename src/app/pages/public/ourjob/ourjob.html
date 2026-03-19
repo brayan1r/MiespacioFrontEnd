@@ -18,16 +18,35 @@
 
   <div class="projects-grid" [class.loading]="loading">
     <div class="project-card" *ngFor="let project of filteredProjects">
+      
+      <!-- Imagen de fondo -->
       <div class="project-image">
         <img [src]="project.image" [alt]="project.title">
-        <div class="project-overlay">
-          <div class="project-category">{{ project.category }}</div>
-          <h3>{{ project.title }}</h3>
-          <div class="project-actions">
-            <button class="btn btn-light btn-sm">Ver Proyecto</button>
+      </div>
+
+      <!-- Contenido de la tarjeta (Glassmorphism) -->
+      <div class="project-content">
+        <span class="project-category">{{ project.category }}</span>
+        <h3 class="project-title">{{ project.title }}</h3>
+        
+        <div class="project-meta">
+          <div class="meta-item">
+            <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="meta-value">{{ project.location }}</span>
+          </div>
+          <div class="meta-item">
+            <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span class="meta-value">{{ project.areaM2 }} m²</span>
+          </div>
+          <div class="meta-item">
+            <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <span class="meta-value">{{ project.year }}</span>
           </div>
         </div>
+
+        <button class="btn btn-outline btn-full project-btn">Explorar Detalles</button>
       </div>
+
     </div>
   </div>
 </section>
@@ -39,7 +58,5 @@
     <a routerLink="/quotation" class="btn btn-light">Iniciar Cotización</a>
   </div>
 </section>
-
-</main>
 
 <app-footer></app-footer>

@@ -18,30 +18,67 @@
       </ul>
       <div class="info-card">
         <p>¿Necesitas algo más específico?</p>
-        <a routerLink="/contact" class="btn btn-outline">Contáctanos Directamente</a>
+        <a routerLink="/contact-us" class="btn btn-outline">Contáctanos Directamente</a>
       </div>
     </div>
 
     <div class="quotation-form-card">
+
+      <!-- Aviso si no está logueado -->
+      <div *ngIf="!isLoggedIn" class="login-notice">
+        <p>Para enviar una cotización debes tener una cuenta.</p>
+        <a routerLink="/login" class="btn btn-primary">Iniciar Sesión</a>
+        <a routerLink="/register" class="btn btn-outline">Crear Cuenta</a>
+      </div>
+
       <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="project_type">Tipo de Proyecto</label>
-          <select id="project_type" formControlName="project_type">
-            <option value="" disabled>Selecciona una opción</option>
-            <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="projectType">Tipo de Proyecto</label>
+            <select id="projectType" formControlName="projectType">
+              <option value="" disabled>Selecciona una opción</option>
+              <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="specificService">Servicio Requerido</label>
+            <select id="specificService" formControlName="specificService">
+              <option value="" disabled>Selecciona un servicio</option>
+              <option *ngFor="let service of serviceTypes" [value]="service">{{ service }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="estimatedBudget">Presupuesto Estimado (COP $)</label>
+            <input type="number" id="estimatedBudget" formControlName="estimatedBudget" placeholder="Ej: 5000000">
+          </div>
+
+          <div class="form-group">
+            <label for="estimatedTime">Tiempo Deseado</label>
+            <select id="estimatedTime" formControlName="estimatedTime">
+              <option value="" disabled>Selecciona una opción</option>
+              <option *ngFor="let time of timeRanges" [value]="time">{{ time }}</option>
+            </select>
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="estimatedBudget">Presupuesto Estimado ($)</label>
-          <input type="number" id="estimatedBudget" formControlName="estimatedBudget" placeholder="Ej: 50000">
+          <label for="location">Ubicación del Proyecto</label>
+          <input type="text" id="location" formControlName="location" placeholder="Ej: Bogotá, Cundinamarca">
         </div>
 
         <div class="form-group">
-          <label for="estimatedTime">Tiempo Deseado</label>
-          <select id="estimatedTime" formControlName="estimatedTime">
-            <option value="" disabled>Selecciona una opción</option>
-            <option *ngFor="let time of timeRanges" [value]="time">{{ time }}</option>
+          <label for="description">Descripción del Proyecto (opcional)</label>
+          <textarea id="description" formControlName="description" rows="4" placeholder="Describe brevemente tu visión..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="preferredContactMethod">Método de Contacto Preferido</label>
+          <select id="preferredContactMethod" formControlName="preferredContactMethod">
+            <option *ngFor="let method of contactMethods" [value]="method.value">{{ method.label }}</option>
           </select>
         </div>
 
@@ -50,7 +87,7 @@
           <div class="alert error" *ngIf="errorMsg">{{ errorMsg }}</div>
         </div>
 
-        <button type="submit" [disabled]="quoteForm.invalid || loading" class="btn btn-primary btn-submit">
+        <button type="submit" [disabled]="quoteForm.invalid || loading || !isLoggedIn" class="btn btn-primary btn-submit">
           {{ loading ? 'Enviando...' : 'Enviar Solicitud' }}
         </button>
       </form>

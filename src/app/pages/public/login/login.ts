@@ -43,7 +43,7 @@ export class Login {
       },
       error: (err: any) => {
         this.loading = false;
-        this.errorMsg = err.error?.msg || 'Error al iniciar sesión';
+        this.errorMsg = err.error?.message || err.error?.msg || 'Error al iniciar sesión';
       },
     });
   }

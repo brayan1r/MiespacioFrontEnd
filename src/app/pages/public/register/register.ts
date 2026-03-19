@@ -24,6 +24,8 @@ export class Register {
   ) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      cellphoneNumber: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -40,15 +42,16 @@ export class Register {
     this.authService.register(this.registerForm.value).subscribe({
       next: (res: any) => {
         this.loading = false;
-        if (res.msg && res.msg.includes('ERROR')) {
-          this.errorMsg = res.msg;
+        if (res.msg && res.msg.includes('ERROR') || res.message && res.message.includes('ERROR')) {
+          this.errorMsg = res.msg || res.message;
         } else {
           this.router.navigate(['/login']);
         }
       },
       error: (err: any) => {
         this.loading = false;
-        this.errorMsg = err.error?.msg || 'Error al registrarse';
+        // El backend responde con "message" en su middleware de errores y en sus controladores
+        this.errorMsg = err.error?.message || err.error?.msg || 'Error al registrarse';
       },
     });
   }

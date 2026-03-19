@@ -69,6 +69,31 @@
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-color);
 
+  .login-notice {
+    background: rgba(37, 99, 235, 0.05);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+
+    p {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .btn {
+      margin: 0.25rem 0.5rem;
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
   .form-group {
     margin-bottom: 1.5rem;
     label {
@@ -78,14 +103,16 @@
       margin-bottom: 0.5rem;
       color: var(--primary-color);
     }
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 0.9rem 1.2rem;
       border: 1px solid var(--border-color);
       border-radius: var(--border-radius-md);
       font-size: 1rem;
+      font-family: inherit;
       background: var(--surface-color);
       transition: var(--transition);
+      resize: vertical;
       &:focus {
         outline: none;
         border-color: var(--primary-color);
@@ -98,18 +125,18 @@
     width: 100%;
     margin-top: 2rem;
     justify-content: center;
-    padding: 1.2rem; /* Added back from original */
-    background-color: var(--primary-color); /* Changed from #1a1a1a to variable */
+    padding: 1.2rem;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 8px; /* Kept from original */
+    border-radius: 8px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease; /* Kept from original */
+    transition: all 0.3s ease;
 
     &:hover:not(:disabled) {
-        background-color: var(--primary-dark); /* Changed from #000 to variable */
+        background-color: var(--primary-dark);
         transform: translateY(-2px);
     }
 

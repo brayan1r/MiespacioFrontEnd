@@ -1,0 +1,47 @@
+
+> mi-espacio-front2.0@0.0.0 build
+> ng build
+
+[33mÔØ»[39m Building...
+[32mÔ£ö[39m Building...
+Application bundle generation failed. [4.080 seconds] - 2026-03-19T05:27:12.291Z
+
+Ô£ÿ [ERROR] TS2339: Property 'avatar' does not exist on type 'User'. [plugin angular-compiler]
+
+    src/app/pages/private/arquitect-profile/arquitect-profile.html:14:28:
+      14 Ôöé           <img [src]="user?.avatar || 'assets/images/default-avata...
+         ÔòÁ                             ~~~~~~
+
+  Error occurs in the template of component ArquitectProfile.
+
+    src/app/pages/private/arquitect-profile/arquitect-profile.ts:12:15:
+      12 Ôöé   templateUrl: './arquitect-profile.html',
+         ÔòÁ                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Ô£ÿ [ERROR] TS2339: Property 'lastName' does not exist on type 'User'. [plugin angular-compiler]
+
+    src/app/pages/private/arquitect-profile/arquitect-profile.html:18:40:
+      18 Ôöé           <h3>{{ user?.name }} {{ user?.lastName }}</h3>
+         ÔòÁ                                         ~~~~~~~~
+
+  Error occurs in the template of component ArquitectProfile.
+
+    src/app/pages/private/arquitect-profile/arquitect-profile.ts:12:15:
+      12 Ôöé   templateUrl: './arquitect-profile.html',
+         ÔòÁ                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Ô£ÿ [ERROR] TS2339: Property 'lastName' does not exist on type 'User'. [plugin angular-compiler]
+
+    src/app/pages/private/arquitect-profile/arquitect-profile.html:41:48:
+      41 Ôöé               <input type="text" [value]="user?.lastName" readonly>
+         ÔòÁ                                                 ~~~~~~~~
+
+  Error occurs in the template of component ArquitectProfile.
+
+    src/app/pages/private/arquitect-profile/arquitect-profile.ts:12:15:
+      12 Ôöé   templateUrl: './arquitect-profile.html',
+         ÔòÁ                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

@@ -22,7 +22,7 @@ export class Quotation implements OnInit {
 
   get filteredQuotes() {
     return this.activeQuotes.filter(q =>
-      q.project_type?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      q.projectType?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
       q.estimatedTime?.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
@@ -59,7 +59,7 @@ export class Quotation implements OnInit {
 
   onRespond(quote: Quote): void {
     const email = 'info@miespacio.com';
-    window.location.href = `mailto:${email}?subject=Respuesta a Cotización: ${quote.project_type}&body=Hola, hemos recibido tu solicitud de presupuesto...`;
+    window.location.href = `mailto:${email}?subject=Respuesta a Cotización: ${quote.projectType}&body=Hola, hemos recibido tu solicitud de presupuesto...`;
   }
 
   onReject(quote: Quote): void {

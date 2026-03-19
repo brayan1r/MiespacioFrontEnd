@@ -8,8 +8,18 @@
 
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="name">Nombre Completo</label>
-                <input type="text" id="name" formControlName="name" placeholder="Juan Pérez">
+                <label for="name">Nombre(s)</label>
+                <input type="text" id="name" formControlName="name" placeholder="Juan Carlos">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Apellidos</label>
+                <input type="text" id="lastName" formControlName="lastName" placeholder="Pérez">
+            </div>
+
+            <div class="form-group">
+                <label for="cellphoneNumber">Número Celular</label>
+                <input type="tel" id="cellphoneNumber" formControlName="cellphoneNumber" placeholder="3001234567">
             </div>
 
             <div class="form-group">

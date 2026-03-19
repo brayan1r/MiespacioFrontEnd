@@ -3,7 +3,7 @@ export interface Quote {
     estimatedBudget: number;
     estimatedTime: '1-3 meses' | '3-6 meses' | '6-12 meses' | 'flexible';
     project_id?: string;
-    project_type?: string;
+    projectType?: string;
 }
 
 export interface QuoteResponse {

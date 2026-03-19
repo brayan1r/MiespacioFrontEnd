@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Quote, QuoteResponse, QuoteDeleteResponse } from './quote.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class QuotesService {
-    private readonly API_URL = 'http://localhost:3000/api/v1/quotes';
+    private readonly API_URL = `${environment.apiUrl}/quotes`;
 
     constructor(private http: HttpClient) { }
 

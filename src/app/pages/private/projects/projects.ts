@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Header } from '../../../shared/children/header/header';
+import { Footer } from '../../../shared/children/footer/footer';
 import { WorksService } from '../../../services/works.service';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, Header],
+  imports: [CommonModule, Header, Footer],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })

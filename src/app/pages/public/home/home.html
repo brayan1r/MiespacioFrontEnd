@@ -3,105 +3,73 @@
 <main>
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Diseñamos el Futuro de tus Espacios</h1>
-            <p>Transformamos ideas en obras arquitectónicas excepcionales. Innovación, calidad y diseño sostenible en
-                cada proyecto.</p>
-            <div class="hero-buttons">
-                <a routerLink="/quotation" class="btn btn-primary">
-                    Solicitar Cotización <i class="icon-arrow-right"></i>
-                </a>
-                <a routerLink="/our-job" class="btn btn-outline">Ver Obras</a>
+        <div class="hero-content container-px">
+            <span class="badge">Estudio de Arquitectura</span>
+            <h1>Arquitectura que Transforma <span class="accent">Espacios</span></h1>
+            <p>Creamos diseños innovadores que fusionan funcionalidad, estética y sostenibilidad para dar vida a tus proyectos más ambiciosos.</p>
+            <div class="hero-actions">
+                <a routerLink="/quotation" class="btn btn-primary">Iniciar Proyecto</a>
+                <a routerLink="/our-job" class="btn btn-outline">Ver Portafolio</a>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="stats">
-        <div class="stat-item" *ngFor="let stat of stats">
-            <div class="stat-icon">
-                <img [src]="stat.icon" [alt]="stat.label">
+    <section class="stats container-px">
+        <div class="stats-grid">
+            <div class="stat-item" *ngFor="let stat of stats">
+                <div class="stat-number">{{ stat.value }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
             </div>
-            <div class="stat-value">{{ stat.value }}</div>
-            <div class="stat-label">{{ stat.label }}</div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="hero">
-  <div class="hero-content container-px">
-    <span class="badge">Estudio de Arquitectura</span>
-    <h1>Arquitectura que Transforma <span class="accent">Espacios</span></h1>
-    <p>Creamos diseños innovadores que fusionan funcionalidad, estética y sostenibilidad para dar vida a tus proyectos más ambiciosos.</p>
-    <div class="hero-actions">
-      <a routerLink="/quotation" class="btn btn-primary">Iniciar Proyecto</a>
-      <a routerLink="/our-job" class="btn btn-outline">Ver Portafolio</a>
-    </div>
-  </div>
-</section>
-
-<section class="stats container-px">
-  <div class="stats-grid">
-    <div class="stat-item" *ngFor="let stat of stats">
-      <div class="stat-number">{{ stat.value }}</div>
-      <div class="stat-label">{{ stat.label }}</div>
-    </div>
-  </div>
-</section>
-
-<section class="about container-px section-spacing">
-  <div class="about-grid">
-    <div class="about-image">
-      <img src="assets/images/aboutUs.JPG" alt="Nuestro Estudio">
-    </div>
-    <div class="about-text">
-      <h2>Diseño con Propósito</h2>
-      <p>En **MI ESPACIO**, creemos que cada estructura cuenta una historia. Nuestro enfoque combina la precisión técnica con una sensibilidad artística única.</p>
-      <ul class="features-list">
-        <li>Innovación Constante</li>
-        <li>Sostenibilidad Ambiental</li>
-        <li>Atención Personalizada</li>
-      </ul>
-      <a routerLink="/services" class="btn btn-outline">Nuestros Servicios</a>
-    </div>
-  </div>
-</section>
-
-<section class="featured-projects container-px section-spacing">
-  <div class="section-header">
-    <h2>Proyectos Destacados</h2>
-    <a routerLink="/our-job" class="view-all">Ver todos →</a>
-  </div>
-
-  <div class="projects-grid">
-    <div class="project-card" *ngFor="let project of featuredProjects">
-      <div class="project-image">
-        <img [src]="project.image" [alt]="project.title">
-        <div class="project-overlay">
-          <div class="project-category">{{ project.category }}</div>
-          <h3>{{ project.title }}</h3>
-          <a [routerLink]="['/our-job']" class="btn btn-light btn-sm">Ver Detalles</a>
+    <section class="about container-px section-spacing">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="assets/images/aboutUs.JPG" alt="Nuestro Estudio">
+            </div>
+            <div class="about-text">
+                <h2>Diseño con Propósito</h2>
+                <p>En **MI ESPACIO**, creemos que cada estructura cuenta una historia. Nuestro enfoque combina la precisión técnica con una sensibilidad artística única.</p>
+                <ul class="features-list">
+                    <li>Innovación Constante</li>
+                    <li>Sostenibilidad Ambiental</li>
+                    <li>Atención Personalizada</li>
+                </ul>
+                <a routerLink="/services" class="btn btn-outline">Nuestros Servicios</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="cta container-px">
-  <div class="cta-banner">
-    <h2>¿Listo para construir tu sueño?</h2>
-    <p>Solicita una cotización personalizada y descubre cómo podemos ayudarte.</p>
-    <a routerLink="/quotation" class="btn btn-light">Obtener Cotización</a>
-  </div>
-</section>
+    <!-- Featured Projects -->
+    <section class="featured-projects container-px section-spacing">
+        <div class="section-header">
+            <h2>Proyectos Destacados</h2>
+            <a routerLink="/our-job" class="view-all">Ver todos →</a>
+        </div>
 
+        <div class="projects-grid">
+            <div class="project-card" *ngFor="let project of featuredProjects">
+                <div class="project-image">
+                    <img [src]="project.image" [alt]="project.title">
+                    <div class="project-overlay">
+                        <div class="project-category">{{ project.category }}</div>
+                        <h3>{{ project.title }}</h3>
+                        <a [routerLink]="['/our-job']" class="btn btn-light btn-sm">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- CTA Section -->
-    <section class="cta">
-        <h3>¿Listo para empezar tu Proyecto?</h3>
-        <p>Contáctanos hoy y descubre cómo podemos transformar tus ideas en realidad. Recibe una cotización
-                personalizada sin compromiso.</p>
-        <a routerLink="/quotation" class="btn btn-light">Solicitar Cotización Gratis <i
-                class="icon-arrow-right"></i></a>
+    <section class="cta container-px">
+        <div class="cta-banner">
+            <h2>¿Listo para construir tu sueño?</h2>
+            <p>Solicita una cotización personalizada y descubre cómo podemos ayudarte.</p>
+            <a routerLink="/quotation" class="btn btn-light">Obtener Cotización</a>
+        </div>
     </section>
-</main>
+</main>

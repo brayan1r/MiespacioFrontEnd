@@ -1,9 +1,13 @@
 export interface User {
     _id?: string;
     name: string;
+    lastName: string;
     email: string;
-    role?: string;
+    role?: 'admin' | 'architect' | 'user';
     password?: string;
+    urlimage?: string;
+    cellphoneNumber?: string;
+    telephone?: string;
 }
 
 export interface AuthResponse {

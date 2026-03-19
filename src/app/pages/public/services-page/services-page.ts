@@ -4,10 +4,12 @@ import { Header } from '../../../shared/children/header/header';
 import { Footer } from '../../../shared/children/footer/footer';
 import { ServicesService } from '../../../services/services.service';
 
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-services-page',
   standalone: true,
-  imports: [CommonModule, Header, Footer],
+  imports: [CommonModule, Header, Footer, RouterModule],
   templateUrl: './services-page.html',
   styleUrl: './services-page.scss',
 })
@@ -57,7 +59,12 @@ export class ServicesPage implements OnInit {
   loadServices(): void {
     this.servicesService.getAllServices().subscribe({
       next: (data) => {
-        this.services = data.length > 0 ? data : this.staticServices;
+        // Mapeamos los servicios del backend para asegurar tener iconos con rutas de imagen válidas
+        const mappedData = data.map(s => ({
+            ...s,
+            icon: s.icon && s.icon.includes('/') ? s.icon : 'assets/icons/footer/maleta.png'
+        }));
+        this.services = mappedData.length > 0 ? mappedData : this.staticServices;
         this.loading = false;
       },
       error: () => {

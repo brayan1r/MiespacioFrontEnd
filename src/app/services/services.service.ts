@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthService } from './auth';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServicesService {
-  private readonly API_URL = 'http://localhost:3000/api/v1/services';
+  private readonly API_URL = `${environment.apiUrl}/services`;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -17,11 +18,15 @@ export class ServicesService {
   }
 
   getAllServices(): Observable<any[]> {
-    return this.http.get<any[]>(this.API_URL);
+    return this.http.get<any>(this.API_URL).pipe(
+      map(res => res.allServices || res || [])
+    );
   }
 
   getServiceById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}/${id}`);
+    return this.http.get<any>(`${this.API_URL}/${id}`).pipe(
+      map(res => res.service || res)
+    );
   }
 
   // Admin

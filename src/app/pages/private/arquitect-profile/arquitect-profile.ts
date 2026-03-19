@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Header } from '../../../shared/children/header/header';
+import { Footer } from '../../../shared/children/footer/footer';
 import { AuthService } from '../../../services/auth';
 import { User } from '../../../services/auth.interface';
 
 @Component({
   selector: 'app-arquitect-profile',
   standalone: true,
-  imports: [CommonModule, Header],
+  imports: [CommonModule, Header, Footer],
   templateUrl: './arquitect-profile.html',
   styleUrl: './arquitect-profile.scss',
 })
